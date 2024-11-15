@@ -1,5 +1,23 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <div id="map"></div>
   </div>
 </template>
+<script setup>
+import L from 'leaflet'
+import { onMounted } from 'vue'
+onMounted(() => {
+  const map = L.map('map').setView([51.505, -0.09], 13)
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map)
+  var marker = L.marker([51.5, -0.09]).addTo(map)
+})
+</script>
+<style scoped lang="scss">
+#map {
+  width: 500px;
+  height: 180px;
+}
+</style>
